@@ -25,9 +25,6 @@
 		<Reference Include="DataModel">
 		  <HintPath>$(VRChatPath)MelonLoader\Managed\DataModel.dll</HintPath>
 		</Reference>
-		<Reference Include="emmVRC">
-		  <HintPath>$(VRChatPath)Dependencies\emmVRC.dll</HintPath>
-		</Reference>
 		<Reference Include="Il2Cppmscorlib">
 			<HintPath>$(VRChatPath)MelonLoader\Managed\Il2Cppmscorlib.dll</HintPath>
 		</Reference>
