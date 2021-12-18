@@ -16,10 +16,7 @@ namespace PlayerList.Entries
         [HideFromIl2Cpp]
         public override void OnInstanceChange(ApiWorld world, ApiWorldInstance instance)
         {
-            if (APIUser.CurrentUser != null && world.authorId == APIUser.CurrentUser.id && LocalPlayerEntry.emmNameSpoofEnabled)
-                textComponent.text = OriginalText.Replace("{worldauthor}", LocalPlayerEntry.emmSpoofedName);
-            else
-                textComponent.text = OriginalText.Replace("{worldauthor}", world.authorName);
+            textComponent.text = OriginalText.Replace("{worldauthor}", world.authorName);
         }
     }
 }
