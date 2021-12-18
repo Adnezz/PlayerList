@@ -23,9 +23,6 @@ namespace PlayerList.Entries
         [HideFromIl2Cpp]
         public override string Name => "Local Player";
 
-        public static bool emmNameSpoofEnabled = false;
-        public static string emmSpoofedName = "";
-
         public new delegate void UpdateEntryDelegate(Player player, LocalPlayerEntry entry, ref StringBuilder tempString);
         public static new UpdateEntryDelegate updateDelegate;
         public static new void EntryInit()
@@ -88,10 +85,7 @@ namespace PlayerList.Entries
             }
             if (PlayerListConfig.displayNameToggle.Value)
             {
-                if (!emmNameSpoofEnabled)
-                    updateDelegate += AddDisplayName;
-                else
-                    typeof(EmmManager).GetMethod("AddSelfToUpdateDelegate").Invoke(null, null);
+                updateDelegate += AddDisplayName;
             }
 
             GetPlayerColor();

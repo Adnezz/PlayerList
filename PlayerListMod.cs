@@ -92,9 +92,6 @@ namespace PlayerList
         {
             if (buildIndex != -1) return;
 
-            if (MelonHandler.Mods.Any(mod => mod.Info.Name == "emmVRCLoader"))
-                typeof(EmmManager).GetMethod("OnSceneWasLoaded").Invoke(null, null);
-
             //MenuManager.OnSceneWasLoaded();
             MelonCoroutines.Start(WaitForMenu());
             //Constants.OnSceneWasLoaded();

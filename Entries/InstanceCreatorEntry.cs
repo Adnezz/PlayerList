@@ -28,10 +28,7 @@ namespace PlayerList.Entries
             { 
                 if (creator == APIUser.CurrentUser? .id)
                 {
-                    if (LocalPlayerEntry.emmNameSpoofEnabled)
-                        textComponent.text = OriginalText.Replace("{instancecreator}", LocalPlayerEntry.emmSpoofedName);
-                    else
-                        textComponent.text = OriginalText.Replace("{instancecreator}", APIUser.CurrentUser.displayName);
+                    textComponent.text = OriginalText.Replace("{instancecreator}", APIUser.CurrentUser.displayName);
                     yield break;
                 }
 
