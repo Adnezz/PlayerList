@@ -303,6 +303,7 @@ namespace PlayerList
 
             });
             UiManager.OnQuickMenuOpened += new Action(() => {
+                EntryManager.CleanUpHungAOI();
                 curMenuState.dashboard = true;
                 curMenuState.plsettings = false;
                 curMenuState.sort = false;

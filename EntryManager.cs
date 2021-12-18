@@ -9,6 +9,7 @@ using UnityEngine;
 using VRC;
 using VRC.Core;
 using VRChatUtilityKit.Utilities;
+using VRC.DataModel;
 using TMPro;
 
 using Object = UnityEngine.Object;
@@ -182,7 +183,7 @@ namespace PlayerList
             }
             //ProcessAvatarInstantiateBacklog();
         }
-        protected static void ProcessAvatarInstantiateBacklog()
+        public static void ProcessAvatarInstantiateBacklog()
         {
             if (AvInstBacklog.Count != 0)
             {
@@ -209,7 +210,7 @@ namespace PlayerList
                     {
                         AvInstBacklog[key].numAttempts++;
 
-                        if (AvInstBacklog[key].numAttempts > 1)
+                        if (AvInstBacklog[key].numAttempts > 2)
                         {
                             MelonLogger.Msg("Max attempts exceeded for backlog entry");
                             AvInstBacklog.Remove(key);
@@ -219,6 +220,20 @@ namespace PlayerList
                 //AvInstBacklog.Clear();
             }
         }
+        public static void CleanUpHungAOI()
+        {
+            foreach (PlayerEntry entry in playerEntries)
+            {
+                if ((entry.perf == AvatarPerformanceRating.None) && ((entry.perfString == "100% ") || (entry.perfString == "?¿?¿?")))
+                {
+                    AvInstBacklog.Add(entry.userId, new deferredAvInstantiate(null, null, null));
+                }
+                
+            }
+            ProcessAvatarInstantiateBacklog();
+
+        }
+
         public static void OnPlayerLeft(Player player)
         {
             
