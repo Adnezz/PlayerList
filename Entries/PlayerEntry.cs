@@ -169,7 +169,7 @@ namespace PlayerList.Entries
             int.TryParse(Regex.Match(perfdeets.FirstOrDefault(x => x.Contains("Skinned Mesh Count")), @"\d+").Value, out int skinnedmeshcount);
             int.TryParse(Regex.Match(perfdeets.LastOrDefault(x => x.Contains("Mesh Count")), @"\d+").Value, out int meshcount);
             int.TryParse(Regex.Match(perfdeets.FirstOrDefault(x => x.Contains("Material Count")), @"\d+").Value, out int matcount);
-            GroupCollection boundAxes = Regex.Match(perfdeets.FirstOrDefault(x => x.Contains("Bounds")), @"Extents: \(([ \d.]+), ([ \d.]+), ([ \d.]+)\)").Groups;
+            GroupCollection boundAxes = Regex.Match(perfdeets.FirstOrDefault(x => x.Contains("Bounds")), @"Extents: \(([\d.]+), ([\d.]+), ([\d.]+)\)").Groups;
             int.TryParse(boundAxes[0].Value, out int boundx);
             int.TryParse(boundAxes[1].Value, out int boundy);
             int.TryParse(boundAxes[2].Value, out int boundz);
