@@ -19,6 +19,7 @@ using VRChatUtilityKit.Ui;
 using VRChatUtilityKit.Utilities;
 using VRCSDK2.Validation.Performance;
 using VRC.DataModel;
+using Il2CppSystem.Collections;
 
 using Player = VRC.Player;
 
@@ -256,10 +257,14 @@ namespace PlayerList.Entries
         }
 
         // So apparently if you don't want to name an enum directly in a harmony patch you have to use int as the type... good to know
-        private static void OnSetupFlagsReceived(VRCPlayer vrcPlayer, int SetupFlagType)
+        private static void OnSetupFlagsReceived(VRCPlayer vrcPlayer, Hashtable SetupFlagType)
         {
-            if (SetupFlagType == 64)
-                EntryManager.idToEntryTable[vrcPlayer.prop_Player_0.prop_APIUser_0.id].playerEntry.GetPlayerColor();
+            try
+            {   //Will occasionally error at EntryManager.idToEntryTable[vrcPlayer.prop_Player_0.prop_APIUser_0.id]
+                if (SetupFlagType.ContainsKey("showSocialRank"))
+                    EntryManager.idToEntryTable[vrcPlayer.prop_Player_0.prop_APIUser_0.id].playerEntry.GetPlayerColor();
+            }
+            catch { }
         }
         public static void UpdateEntry(PlayerNet playerNet, PlayerEntry entry, bool bypassActive = false)
         {
