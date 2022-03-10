@@ -134,7 +134,7 @@ namespace PlayerList.Entries
 
         private static void AddPing(Player player, LocalPlayerEntry entry, ref StringBuilder tempString)
         {
-            entry.ping = (short)Photon.Pun.PhotonNetwork.field_Public_Static_LoadBalancingClient_0.prop_LoadBalancingPeer_0.RoundTripTime;
+            entry.ping = (short)Photon.Pun.PhotonNetwork.field_Public_Static_LoadBalancingClient_0.prop_PhotonPeerPublicPo1PaTyUnique_0.RoundTripTime;  // prop_LoadBalancingPeer_0.RoundTripTime;
             tempString.Append("<color=" + PlayerUtils.GetPingColor(entry.ping) + ">");
             if (entry.ping < 9999 && entry.ping > -999)
                 tempString.Append(entry.ping.ToString().PadRight(4) + "ms</color>");

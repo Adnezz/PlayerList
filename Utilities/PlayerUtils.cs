@@ -1,6 +1,7 @@
 ﻿using VRC;
 using VRC.DataModel;
 using UnityEngine;
+using VRCUiAvatarStatsPanel = MonoBehaviourPublicStAvSt1AvTeSpBoSpCoUnique;
 
 namespace PlayerList.Utilities
 {
