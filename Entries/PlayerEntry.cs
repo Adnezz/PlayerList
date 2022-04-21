@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -15,11 +15,9 @@ using UnhollowerBaseLib.Attributes;
 using UnityEngine;
 using VRC.Core;
 using VRC.SDKBase;
+using VRC.SDKBase.Validation.Performance;
 using VRChatUtilityKit.Ui;
 using VRChatUtilityKit.Utilities;
-using VRCSDK2.Validation.Performance;
-using VRC.DataModel;
-
 using Player = VRC.Player;
 
 namespace PlayerList.Entries
@@ -49,7 +47,7 @@ namespace PlayerList.Entries
         protected static int highestOwnedObjectsLength = 0;
         protected static int totalObjects = 0;
         
-        public AvatarPerformanceRating perf;
+        public PerformanceRating perf;
         public string perfString;
         public string jeffString;
         public int ping;
@@ -93,7 +91,7 @@ namespace PlayerList.Entries
             userId = apiUser.id;
             
             platform = platform = PlayerUtils.GetPlatform(player).PadRight(2);
-            perf = AvatarPerformanceRating.None;
+            perf = PerformanceRating.None;
             perfString = "<color=#" + PlayerUtils.GetPerformanceColor(perf) + ">" + PlayerUtils.ParsePerformanceText(perf) + "</color>";
             jeffString = "<color=#FFFF00>Unknown </color>";
             partyFouls = 1;
@@ -163,7 +161,7 @@ namespace PlayerList.Entries
                 
             //manager
 
-            perf = (AvatarPerformanceRating)player.prop_VRCPlayer_0.field_Private_VRCAvatarManager_0.prop_AvatarPerformanceStats_0.field_Private_ArrayOf_EnumPublicSealedvaNoExGoMePoVe7v0_0[(int)AvatarPerformanceCategory.Overall];
+            perf = player.prop_VRCPlayer_0.field_Private_VRCAvatarManager_0.prop_AvatarPerformanceStats_0.GetPerformanceRatingForCategory(AvatarPerformanceCategory.Overall);
             List<string> perfdeets = player.prop_VRCPlayer_0.field_Private_VRCAvatarManager_0.prop_AvatarPerformanceStats_0.ToString().Split('\n').ToList();
             int.TryParse(Regex.Match(perfdeets.FirstOrDefault(x => x.Contains("Poly Count")), @"\d+").Value, out int polycount);
             int.TryParse(Regex.Match(perfdeets.FirstOrDefault(x => x.Contains("Skinned Mesh Count")), @"\d+").Value, out int skinnedmeshcount);
@@ -227,7 +225,7 @@ namespace PlayerList.Entries
             if (loadingBar.field_Public_PlayerNameplate_0.field_Private_VRCPlayer_0.prop_Player_0.prop_APIUser_0?.id != userId)
                 return;
 
-            perf = AvatarPerformanceRating.None;
+            perf = PerformanceRating.None;
 
             if (downloadPercentage < 1)
             {
@@ -256,10 +254,10 @@ namespace PlayerList.Entries
         }
 
         // So apparently if you don't want to name an enum directly in a harmony patch you have to use int as the type... good to know
-        private static void OnSetupFlagsReceived(VRCPlayer vrcPlayer, int SetupFlagType)
+        private static void OnSetupFlagsReceived(VRCPlayer vrcPlayer, Il2CppSystem.Collections.Hashtable SetupFlagType)
         {
-            if (SetupFlagType == 64)
-                EntryManager.idToEntryTable[vrcPlayer.prop_Player_0.prop_APIUser_0.id].playerEntry.GetPlayerColor();
+			if (SetupFlagType.ContainsKey("showSocialRank") && SetupFlagType["showSocialRank"].ToString() == "True")
+				EntryManager.idToEntryTable[vrcPlayer.prop_Player_0.prop_APIUser_0.id].playerEntry.GetPlayerColor();
         }
         public static void UpdateEntry(PlayerNet playerNet, PlayerEntry entry, bool bypassActive = false)
         {

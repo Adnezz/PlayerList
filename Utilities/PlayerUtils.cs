@@ -1,7 +1,6 @@
-﻿using VRC;
-using VRC.DataModel;
-using UnityEngine;
-using VRCUiAvatarStatsPanel = MonoBehaviourPublicStAvSt1AvTeSpBoSpCoUnique;
+﻿using UnityEngine;
+using VRC;
+using VRC.SDKBase.Validation.Performance;
 
 namespace PlayerList.Utilities
 {
@@ -44,41 +43,41 @@ namespace PlayerList.Utilities
             else
                 return "#ff0000";
         }
-        public static string ParsePerformanceText(AvatarPerformanceRating rating)
+        public static string ParsePerformanceText(PerformanceRating rating)
         {
             switch (rating)
             {
-                case AvatarPerformanceRating.VeryPoor:
+                case PerformanceRating.VeryPoor:
                     return "Awful";
-                case AvatarPerformanceRating.Poor:
+                case PerformanceRating.Poor:
                     return "Poor".PadRight(5);
-                case AvatarPerformanceRating.Medium:
+                case PerformanceRating.Medium:
                     return "Med".PadRight(5);
-                case AvatarPerformanceRating.Good:
+                case PerformanceRating.Good:
                     return "Good".PadRight(5);
-                case AvatarPerformanceRating.Excellent:
+                case PerformanceRating.Excellent:
                     return "Great";
-                case AvatarPerformanceRating.None:
+                case PerformanceRating.None:
                     return "?¿?¿?";
                 default:
                     return rating.ToString().PadRight(5);
             }
         }
-        public static string GetPerformanceColor(AvatarPerformanceRating rating)
+        public static string GetPerformanceColor(PerformanceRating rating)
         {
             switch (rating)
             {
-                case AvatarPerformanceRating.VeryPoor:
+                case PerformanceRating.VeryPoor:
                     return ColorUtility.ToHtmlStringRGB(VRCUiAvatarStatsPanel.field_Private_Static_Color_4);
-                case AvatarPerformanceRating.Poor:
+                case PerformanceRating.Poor:
                     return ColorUtility.ToHtmlStringRGB(VRCUiAvatarStatsPanel.field_Private_Static_Color_3);
-                case AvatarPerformanceRating.Medium:
+                case PerformanceRating.Medium:
                     return ColorUtility.ToHtmlStringRGB(VRCUiAvatarStatsPanel.field_Private_Static_Color_2);
-                case AvatarPerformanceRating.Good:
+                case PerformanceRating.Good:
                     return ColorUtility.ToHtmlStringRGB(VRCUiAvatarStatsPanel.field_Private_Static_Color_1);
-                case AvatarPerformanceRating.Excellent:
+                case PerformanceRating.Excellent:
                     return ColorUtility.ToHtmlStringRGB(VRCUiAvatarStatsPanel.field_Private_Static_Color_0);
-                case AvatarPerformanceRating.None:
+                case PerformanceRating.None:
                     return "888888";
                 default:
                     return rating.ToString().PadRight(5);
