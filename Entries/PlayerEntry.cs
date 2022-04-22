@@ -18,6 +18,7 @@ using VRC.SDKBase;
 using VRC.SDKBase.Validation.Performance;
 using VRChatUtilityKit.Ui;
 using VRChatUtilityKit.Utilities;
+using Il2CppSystem.Collections;
 using Player = VRC.Player;
 
 namespace PlayerList.Entries
