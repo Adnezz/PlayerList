@@ -1,8 +1,7 @@
-﻿using VRC;
-using VRC.DataModel;
-using VRC.SDKBase.Validation.Performance;
 using UnityEngine;
-//using VRCUiAvatarStatsPanel = MonoBehaviourPublicStAvSt1AvTeSpBoSpCoUnique;
+using VRC;
+using VRC.SDKBase.Validation.Performance;
+
 
 namespace PlayerList.Utilities
 {

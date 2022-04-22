@@ -19,8 +19,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Reference Include="0Harmony">
-		  <HintPath>..\..\..\..\..\SteamSSD\SteamApps\common\VRChat\MelonLoader\0Harmony.dll</HintPath>
+		<Reference Include="HarmonyLib">
+			<HintPath>$(VRChatPath)MelonLoader\0Harmony.dll</HintPath>
 		</Reference>
 		<Reference Include="Assembly-CSharp">
 			<HintPath>$(VRChatPath)MelonLoader\Managed\Assembly-CSharp.dll</HintPath>

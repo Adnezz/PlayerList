@@ -8,11 +8,8 @@ using PlayerList.Utilities;
 using UnityEngine;
 using VRC;
 using VRC.Core;
-using VRChatUtilityKit.Utilities;
 using VRC.SDKBase.Validation.Performance;
-using VRC.DataModel;
-using TMPro;
-
+using VRChatUtilityKit.Utilities;
 using Object = UnityEngine.Object;
 
 namespace PlayerList

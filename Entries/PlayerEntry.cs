@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -15,12 +15,9 @@ using UnhollowerBaseLib.Attributes;
 using UnityEngine;
 using VRC.Core;
 using VRC.SDKBase;
+using VRC.SDKBase.Validation.Performance;
 using VRChatUtilityKit.Ui;
 using VRChatUtilityKit.Utilities;
-using VRC.SDKBase.Validation.Performance;
-using VRC.DataModel;
-using Il2CppSystem.Collections;
-
 using Player = VRC.Player;
 
 namespace PlayerList.Entries
@@ -259,12 +256,17 @@ namespace PlayerList.Entries
         // So apparently if you don't want to name an enum directly in a harmony patch you have to use int as the type... good to know
         private static void OnSetupFlagsReceived(VRCPlayer vrcPlayer, Hashtable SetupFlagType)
         {
-            try
-            {   //Will occasionally error at EntryManager.idToEntryTable[vrcPlayer.prop_Player_0.prop_APIUser_0.id]
-                if (SetupFlagType.ContainsKey("showSocialRank"))
-                    EntryManager.idToEntryTable[vrcPlayer.prop_Player_0.prop_APIUser_0.id].playerEntry.GetPlayerColor();
+            if (SetupFlagType.ContainsKey("showSocialRank") && SetupFlagType["showSocialRank"].ToString() == "True")
+            {
+                try
+                {
+                    EntryManager.idToEntryTable[vrcPlayer.prop_Player_0.prop_APIUser_0.id]?.playerEntry?.GetPlayerColor();
+                }
+                catch
+                {
+                    PlayerListMod.Instance.LoggerInstance.Warning("Couldn't get player entry in OnSetupFlagsReceived");
+                }
             }
-            catch { }
         }
         public static void UpdateEntry(PlayerNet playerNet, PlayerEntry entry, bool bypassActive = false)
         {
