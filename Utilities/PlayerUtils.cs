@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+using UnityEngine;
 using VRC;
 using VRC.SDKBase.Validation.Performance;
+
 
 namespace PlayerList.Utilities
 {

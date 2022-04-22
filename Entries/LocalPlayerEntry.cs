@@ -11,6 +11,7 @@ using VRC.SDKBase.Validation.Performance;
 using VRChatUtilityKit.Ui;
 using VRChatUtilityKit.Utilities;
 
+
 namespace PlayerList.Entries
 {
     [RegisterTypeInIl2Cpp]

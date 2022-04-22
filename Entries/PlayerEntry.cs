@@ -158,7 +158,7 @@ namespace PlayerList.Entries
                 MelonLogger.Msg("PE: OnAvInst: Bailed due to userId mismatch");
                 return;
             }*/
-                
+
             //manager
 
             perf = player.prop_VRCPlayer_0.field_Private_VRCAvatarManager_0.prop_AvatarPerformanceStats_0.GetPerformanceRatingForCategory(AvatarPerformanceCategory.Overall);
@@ -222,7 +222,7 @@ namespace PlayerList.Entries
         [HideFromIl2Cpp]
         public override void OnAvatarDownloadProgressed(AvatarLoadingBar loadingBar, float downloadPercentage, long fileSize)
         {
-            if (loadingBar.field_Public_PlayerNameplate_0.field_Private_VRCPlayer_0.prop_Player_0.prop_APIUser_0?.id != userId)
+            if (loadingBar.field_Public_PlayerNameplate_0.field_Private_VRCPlayer_0.prop_Player_0.prop_APIUser_0?.id != userId) 
                 return;
 
             perf = PerformanceRating.None;
@@ -254,7 +254,7 @@ namespace PlayerList.Entries
         }
 
         // So apparently if you don't want to name an enum directly in a harmony patch you have to use int as the type... good to know
-        private static void OnSetupFlagsReceived(VRCPlayer vrcPlayer, Il2CppSystem.Collections.Hashtable SetupFlagType)
+        private static void OnSetupFlagsReceived(VRCPlayer vrcPlayer, Hashtable SetupFlagType)
         {
             if (SetupFlagType.ContainsKey("showSocialRank") && SetupFlagType["showSocialRank"].ToString() == "True")
             {
