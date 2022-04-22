@@ -9,6 +9,7 @@ using UnityEngine;
 using VRC;
 using VRC.Core;
 using VRChatUtilityKit.Utilities;
+using VRC.SDKBase.Validation.Performance;
 using VRC.DataModel;
 using TMPro;
 
@@ -224,7 +225,7 @@ namespace PlayerList
         {
             foreach (PlayerEntry entry in playerEntries)
             {
-                if ((entry.perf == AvatarPerformanceRating.None) && ((entry.perfString == "100% ") || (entry.perfString == "?¿?¿?")))
+                if ((entry.perf == PerformanceRating.None) && ((entry.perfString == "100% ") || (entry.perfString == "?¿?¿?")))
                 {
                     AvInstBacklog.Add(entry.userId, new deferredAvInstantiate(null, null, null));
                 }

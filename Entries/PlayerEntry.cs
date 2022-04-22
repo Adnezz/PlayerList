@@ -17,7 +17,7 @@ using VRC.Core;
 using VRC.SDKBase;
 using VRChatUtilityKit.Ui;
 using VRChatUtilityKit.Utilities;
-using VRCSDK2.Validation.Performance;
+using VRC.SDKBase.Validation.Performance;
 using VRC.DataModel;
 using Il2CppSystem.Collections;
 
@@ -50,7 +50,7 @@ namespace PlayerList.Entries
         protected static int highestOwnedObjectsLength = 0;
         protected static int totalObjects = 0;
         
-        public AvatarPerformanceRating perf;
+        public PerformanceRating perf;
         public string perfString;
         public string jeffString;
         public int ping;
@@ -94,7 +94,7 @@ namespace PlayerList.Entries
             userId = apiUser.id;
             
             platform = platform = PlayerUtils.GetPlatform(player).PadRight(2);
-            perf = AvatarPerformanceRating.None;
+            perf = PerformanceRating.None;
             perfString = "<color=#" + PlayerUtils.GetPerformanceColor(perf) + ">" + PlayerUtils.ParsePerformanceText(perf) + "</color>";
             jeffString = "<color=#FFFF00>Unknown </color>";
             partyFouls = 1;
@@ -161,10 +161,10 @@ namespace PlayerList.Entries
                 MelonLogger.Msg("PE: OnAvInst: Bailed due to userId mismatch");
                 return;
             }*/
-                
+
             //manager
 
-            perf = (AvatarPerformanceRating)player.prop_VRCPlayer_0.field_Private_VRCAvatarManager_0.prop_AvatarPerformanceStats_0.field_Private_ArrayOf_EnumPublicSealedvaNoExGoMePoVe7v0_0[(int)AvatarPerformanceCategory.Overall];
+            perf = player.prop_VRCPlayer_0.field_Private_VRCAvatarManager_0.prop_AvatarPerformanceStats_0.GetPerformanceRatingForCategory(AvatarPerformanceCategory.Overall);
             List<string> perfdeets = player.prop_VRCPlayer_0.field_Private_VRCAvatarManager_0.prop_AvatarPerformanceStats_0.ToString().Split('\n').ToList();
             int.TryParse(Regex.Match(perfdeets.FirstOrDefault(x => x.Contains("Poly Count")), @"\d+").Value, out int polycount);
             int.TryParse(Regex.Match(perfdeets.FirstOrDefault(x => x.Contains("Skinned Mesh Count")), @"\d+").Value, out int skinnedmeshcount);
@@ -225,10 +225,10 @@ namespace PlayerList.Entries
         [HideFromIl2Cpp]
         public override void OnAvatarDownloadProgressed(AvatarLoadingBar loadingBar, float downloadPercentage, long fileSize)
         {
-            if (loadingBar.field_Public_PlayerNameplate_0.field_Private_VRCPlayer_0.prop_Player_0.prop_APIUser_0?.id != userId)
+            if (loadingBar.field_Public_PlayerNameplate_0.field_Private_VRCPlayer_0.prop_Player_0.prop_APIUser_0?.id != userId) 
                 return;
 
-            perf = AvatarPerformanceRating.None;
+            perf = PerformanceRating.None;
 
             if (downloadPercentage < 1)
             {
