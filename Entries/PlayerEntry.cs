@@ -47,7 +47,7 @@ namespace PlayerList.Entries
         protected static int highestPhotonIdLength = 0;
         protected static int highestOwnedObjectsLength = 0;
         protected static int totalObjects = 0;
-        
+
         public PerformanceRating perf;
         public string perfString;
         public string jeffString;
@@ -81,7 +81,7 @@ namespace PlayerList.Entries
             VRCUtils.OnEmmWorldCheckCompleted += (allowed) => OnStaticConfigChanged();
 
             PlayerListMod.Instance.HarmonyInstance.Patch(typeof(PhotonView).GetMethods().First(mb => mb.Name.StartsWith("Method_FamOrAssem_set_Void_Int32_")), new HarmonyMethod(typeof(PlayerEntry).GetMethod(nameof(OnOwnerShipTransferred), BindingFlags.NonPublic | BindingFlags.Static)));
-            PlayerListMod.Instance.HarmonyInstance.Patch(typeof(APIUser).GetMethod("IsFriendsWith"), new HarmonyMethod(typeof(PlayerEntry).GetMethod(nameof(OnIsFriend), BindingFlags.NonPublic | BindingFlags.Static)));        
+            PlayerListMod.Instance.HarmonyInstance.Patch(typeof(APIUser).GetMethod("IsFriendsWith"), new HarmonyMethod(typeof(PlayerEntry).GetMethod(nameof(OnIsFriend), BindingFlags.NonPublic | BindingFlags.Static)));
         }
 
         [HideFromIl2Cpp]
@@ -90,7 +90,7 @@ namespace PlayerList.Entries
             player = (Player)parameters[0];
             apiUser = player.prop_APIUser_0;
             userId = apiUser.id;
-            
+
             platform = platform = PlayerUtils.GetPlatform(player).PadRight(2);
             perf = PerformanceRating.None;
             perfString = "<color=#" + PlayerUtils.GetPerformanceColor(perf) + ">" + PlayerUtils.ParsePerformanceText(perf) + "</color>";
@@ -189,7 +189,7 @@ namespace PlayerList.Entries
                 failReasons += "Me";
             }
             else failReasons += "  ";
-            if (matcount > PlayerListConfig.matLimit.Value) 
+            if (matcount > PlayerListConfig.matLimit.Value)
             {
                 partyFouls++;
                 failReasons += "Mt";
@@ -215,7 +215,7 @@ namespace PlayerList.Entries
 
             if (player.prop_PlayerNet_0 != null)
                 UpdateEntry(player.prop_PlayerNet_0, this, true);
-            
+
             if (EntrySortManager.IsSortTypeInUse(EntrySortManager.SortType.AvatarPerf) || EntrySortManager.IsSortTypeInUse(EntrySortManager.SortType.Jeff))
                 EntrySortManager.SortPlayer(playerLeftPairEntry);
 
@@ -223,7 +223,7 @@ namespace PlayerList.Entries
         [HideFromIl2Cpp]
         public override void OnAvatarDownloadProgressed(AvatarLoadingBar loadingBar, float downloadPercentage, long fileSize)
         {
-            if (loadingBar.field_Public_PlayerNameplate_0.field_Private_VRCPlayer_0.prop_Player_0.prop_APIUser_0?.id != userId) 
+            if (loadingBar.field_Public_PlayerNameplate_0.field_Private_VRCPlayer_0.prop_Player_0.prop_APIUser_0?.id != userId)
                 return;
 
             perf = PerformanceRating.None;
@@ -241,7 +241,7 @@ namespace PlayerList.Entries
                     jeffString = "<color=#" + col + ">  " + ((downloadPercentage * 100).ToString("N1") + "%").PadRight(6) + "</color>";
                 }
 
-                    
+
 
 
             }
@@ -405,7 +405,7 @@ namespace PlayerList.Entries
             // Its really important that this actually fires so everything in try catch
             try
             {
-                Room room = Player.prop_Player_0?.prop_PlayerNet_0?.field_Private_PhotonView_0?.prop_Player_0?.field_Private_Room_0;
+                Room room = Player.prop_Player_0?.prop_PlayerNet_0?.prop_PhotonView_0?.prop_Player_0?.field_Private_Room_0;
                 if (room == null)
                     return;
 

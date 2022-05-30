@@ -8,7 +8,7 @@ using UnhollowerRuntimeLib;
 using UnityEngine;
 using VRChatUtilityKit.Components;
 
-[assembly: MelonInfo(typeof(PlayerList.PlayerListMod), "PlayerList", "2.0.4", "Adnezz", "https://github.com/Adnezz/PlayerList")]
+[assembly: MelonInfo(typeof(PlayerList.PlayerListMod), "PlayerList", "2.0.5", "Adnezz", "https://github.com/Adnezz/PlayerList")]
 [assembly: MelonGame("VRChat", "VRChat")]
 [assembly: MelonOptionalDependencies("UIExpansionKit", "emmVRC")]
 
@@ -66,7 +66,7 @@ namespace PlayerList
 
             MenuManager.LoadAssetBundle();
 
-            // Initialize submenu for the list 
+            // Initialize submenu for the list
             //MenuManager.CreateMainSubMenu();
             MenuManager.OnUiManagerInit();
 
