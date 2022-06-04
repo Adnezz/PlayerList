@@ -257,16 +257,9 @@ namespace PlayerList.Entries
         // So apparently if you don't want to name an enum directly in a harmony patch you have to use int as the type... good to know
         private static void OnSetupFlagsReceived(VRCPlayer vrcPlayer, Hashtable SetupFlagType)
         {
-            if (SetupFlagType.ContainsKey("showSocialRank") && SetupFlagType["showSocialRank"].ToString() == "True")
+            if (EntryManager.idToEntryTable.ContainsKey(vrcPlayer.prop_Player_0.prop_APIUser_0.id) && SetupFlagType.ContainsKey("showSocialRank") && SetupFlagType["showSocialRank"].ToString() == "True")
             {
-                try
-                {
-                    EntryManager.idToEntryTable[vrcPlayer.prop_Player_0.prop_APIUser_0.id]?.playerEntry?.GetPlayerColor();
-                }
-                catch
-                {
-                    PlayerListMod.Instance.LoggerInstance.Warning("Couldn't get player entry in OnSetupFlagsReceived");
-                }
+                EntryManager.idToEntryTable[vrcPlayer.prop_Player_0.prop_APIUser_0.id]?.playerEntry?.GetPlayerColor();
             }
         }
         public static void UpdateEntry(PlayerNet playerNet, PlayerEntry entry, bool bypassActive = false)
